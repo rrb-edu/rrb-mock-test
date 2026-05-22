@@ -7,6 +7,11 @@ if (
   alert("Admin access only");
   window.location.href = "login.html";
 }
+else{
+
+  document.body.style.display = "block";
+
+}
 
 function getAdminQuestions() {
   return JSON.parse(localStorage.getItem("adminQuestions")) || [];
