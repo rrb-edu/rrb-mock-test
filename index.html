@@ -7,6 +7,13 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <script>
+  if(localStorage.getItem("studentName")){
+    window.location.href = "dashboard.html";
+  } else {
+    window.location.href = "login.html";
+  }
+</script>
 
   <header class="top-header">
     <div class="exam-title">RRB NTPC Undergraduate CBT 2</div>
