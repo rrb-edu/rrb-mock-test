@@ -295,7 +295,7 @@ allTests.push({
 
   localStorage.setItem("allMockTests", JSON.stringify(allTests));
 
-  fetch("http://localhost:5000/api/mock-tests/save", {
+  fetch("http://https://rrb-mock-test.onrender.com/api/mock-tests/save", {
 
   method: "POST",
 
@@ -423,7 +423,7 @@ async function showMockTests() {
   let box = document.getElementById("mockTestManager");
 
   try {
-    let response = await fetch("http://localhost:5000/api/mock-tests");
+    let response = await fetch("http://https://rrb-mock-test.onrender.com/api/mock-tests");
 
     let allTests = await response.json();
 
@@ -482,7 +482,7 @@ async function deleteMockTest(id){
   try{
 
     let response = await fetch(
-      `http://localhost:5000/api/mock-tests/delete/${id}`,
+      `http://https://rrb-mock-test.onrender.com/api/mock-tests/delete/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -510,10 +510,10 @@ async function deleteMockTest(id){
 
 async function loadAdminStats(){
 
-  let testsRes = await fetch("http://localhost:5000/api/mock-tests");
+  let testsRes = await fetch("http://https://rrb-mock-test.onrender.com/api/mock-tests");
   let allTests = await testsRes.json();
 
-  let resultsRes = await fetch("http://localhost:5000/api/results");
+  let resultsRes = await fetch("http://https://rrb-mock-test.onrender.com/api/results");
   let results = await resultsRes.json();
 
   let totalQuestions = 0;
@@ -544,10 +544,10 @@ loadAdminStats();
 
 async function loadAdminCharts(){
 
-  let testsRes = await fetch("http://localhost:5000/api/mock-tests");
+  let testsRes = await fetch("http://https://rrb-mock-test.onrender.com/api/mock-tests");
   let allTests = await testsRes.json();
 
-  let resultsRes = await fetch("http://localhost:5000/api/results");
+  let resultsRes = await fetch("http://https://rrb-mock-test.onrender.com/api/results");
   let results = await resultsRes.json();
 
   let categories = {};
@@ -690,7 +690,7 @@ async function editMockTest(id){
   try{
 
     let response = await fetch(
-      `http://localhost:5000/api/mock-tests/update/${id}`,
+      `http://https://rrb-mock-test.onrender.com/api/mock-tests/update/${id}`,
       {
         method: "PUT",
 
@@ -730,7 +730,7 @@ async function showStudents(){
 
   let box = document.getElementById("studentsBox");
 
-  let response = await fetch("http://localhost:5000/api/auth/students");
+  let response = await fetch("http://https://rrb-mock-test.onrender.com/api/auth/students");
 
   let students = await response.json();
 
@@ -772,7 +772,7 @@ async function showStudents(){
 async function updatePremium(id, status){
 
   let response = await fetch(
-    `http://localhost:5000/api/auth/premium/${id}`,
+    `http://https://rrb-mock-test.onrender.com/api/auth/premium/${id}`,
     {
       method: "PUT",
       headers: {

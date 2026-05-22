@@ -16,7 +16,7 @@ function goToExam(){
 
 async function loadHistory(){
   try{
-    let response = await fetch("http://localhost:5000/api/results");
+    let response = await fetch("http://https://rrb-mock-test.onrender.com/api/results");
     let results = await response.json();
 
     let studentResults =
@@ -82,7 +82,7 @@ async function loadCharts(){
       return;
     }
 
-    let response = await fetch("http://localhost:5000/api/results");
+    let response = await fetch("http://https://rrb-mock-test.onrender.com/api/results");
     let results = await response.json();
 
     let studentResults =
@@ -149,7 +149,7 @@ async function loadMockTests(){
   let box = document.getElementById("mockTestList");
 
   try{
-    let response = await fetch("http://localhost:5000/api/mock-tests");
+    let response = await fetch("http://https://rrb-mock-test.onrender.com/api/mock-tests");
     let allTests = await response.json();
 
     if(allTests.length === 0){
