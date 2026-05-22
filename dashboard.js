@@ -3,6 +3,9 @@ console.log("Dashboard JS connected");
 if(!localStorage.getItem("studentName")){
   window.location.href = "login.html";
 }
+else{
+  document.body.style.display = "block";
+}
 
 const studentName = localStorage.getItem("studentName") || "Student";
 
