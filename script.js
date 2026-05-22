@@ -1365,7 +1365,7 @@ function submitTest() {
     date: new Date().toLocaleString()
   };
 
-  fetch("http://https://rrb-mock-test.onrender.com/api/results/save", {
+  fetch("https://rrb-mock-test.onrender.com/api/results/save", {
 
   method: "POST",
 

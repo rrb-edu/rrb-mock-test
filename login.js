@@ -45,7 +45,7 @@ async function signupUser(){
   try{
 
     let response = await fetch(
-      "http://https://rrb-mock-test.onrender.com/api/auth/signup",
+      "https://rrb-mock-test.onrender.com/api/auth/signup",
       {
 
         method: "POST",
@@ -97,7 +97,7 @@ async function loginUser(){
   try{
 
     let response = await fetch(
-      "http://https://rrb-mock-test.onrender.com/api/auth/login",
+      "https://rrb-mock-test.onrender.com/api/auth/login",
       {
 
         method: "POST",
