@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RRB CBT Portal</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<div class="login-container">
+
+  <div class="login-card">
+
+    <h1>RRB CBT Portal</h1>
+
+    <div class="tabs">
+      <button id="loginTab" class="active" onclick="showLogin()">Login</button>
+      <button id="signupTab" onclick="showSignup()">Signup</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+
+    <div id="loginForm">
+
+      <input type="email" id="loginEmail" placeholder="Enter Email">
+
+      <input type="password" id="loginPassword" placeholder="Enter Password">
+
+      <button onclick="loginUser()">Login</button>
+
+    </div>
+
+    <!-- SIGNUP FORM -->
+
+    <div id="signupForm" style="display:none;">
+
+      <input type="text" id="signupName" placeholder="Enter Name">
+
+      <input type="email" id="signupEmail" placeholder="Enter Email">
+
+      <input type="password" id="signupPassword" placeholder="Create Password">
+
+      <button onclick="signupUser()">Create Account</button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script src="login.js"></script>
+
+</body>
+</html>

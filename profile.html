@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Profile</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+  <div class="top-bar">
+    <h1>Student Profile</h1>
+    <button onclick="window.location.href='dashboard.html'">Back</button>
+  </div>
+
+  <div class="history-box">
+    <h2 id="profileName">Student</h2>
+    <p id="profileEmail"></p>
+
+    <div class="admin-stats">
+      <div class="stat-box">
+        <h2 id="profileAttempts">0</h2>
+        <p>Total Attempts</p>
+      </div>
+
+      <div class="stat-box">
+        <h2 id="profileBest">0</h2>
+        <p>Best Score</p>
+      </div>
+
+      <div class="stat-box">
+        <h2 id="profileAverage">0</h2>
+        <p>Average Score</p>
+      </div>
+
+      <div class="stat-box">
+        <h2>Free</h2>
+        <p>Plan</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="profile.js"></script>
+</body>
+</html>

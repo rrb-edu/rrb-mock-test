@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+  <div class="top-bar">
+    <h1 id="studentName">Student Dashboard</h1>
+    <button onclick="window.location.href='profile.html'">
+  Profile
+</button>
+
+    <button onclick="sessionStorage.removeItem('examAllowed'); window.location.href='instructions.html';">
+  Start Exam
+</button>
+
+<button onclick="logoutUser()" class="logout-btn">
+  Logout
+</button>
+<button onclick="window.location.href='pricing.html'">
+  Pricing
+</button>
+
+<div class="test-list-box">
+  <h2>Choose Mock Test</h2>
+  <input
+  type="text"
+  id="searchMock"
+  placeholder="Search Mock Tests..."
+  onkeyup="searchMockTests()"
+>
+
+<select id="categoryFilter" onchange="filterByCategory()">
+  <option value="All">All Categories</option>
+  <option value="Mathematics">Mathematics</option>
+  <option value="Reasoning">Reasoning</option>
+  <option value="General Awareness">General Awareness</option>
+  <option value="Physics">Physics</option>
+  <option value="Chemistry">Chemistry</option>
+  <option value="Full Mock Test">Full Mock Test</option>
+</select>
+  <div id="mockTestList"></div>
+</div>
+  </div>
+
+  <div class="history-box">
+
+    <h2>Exam History</h2>
+
+<div id="historyTable"></div>
+
+<div class="charts-box">
+
+  <h2>Performance Analytics</h2>
+
+  <div class="chart-wrapper">
+    <canvas id="scoreChart"></canvas>
+  </div>
+
+  <div class="chart-wrapper">
+    <canvas id="attemptChart"></canvas>
+  </div>
+
+</div>
+
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>

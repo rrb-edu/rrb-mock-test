@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel - RRB CBT</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="admin-container">
+  <div class="admin-card">
+
+    <button onclick="logoutAdmin()" class="danger">Logout</button>
+    <button onclick="showMockTests()">
+  Manage Mock Tests
+</button>
+<button onclick="showStudents()">
+  Manage Students
+</button>
+
+<div id="studentsBox"></div>
+
+<div id="mockTestManager"></div>
+
+    <h1>Admin Panel</h1>
+
+
+    <div class="admin-stats">
+  <div class="stat-box">
+    <h2 id="totalTests">0</h2>
+    <p>Total Mock Tests</p>
+  </div>
+  <div class="admin-chart-box">
+  <h2>Admin Analytics</h2>
+
+  <canvas id="categoryChart"></canvas>
+
+  <canvas id="scoreChart"></canvas>
+</div>
+
+  <div class="stat-box">
+    <h2 id="totalQuestions">0</h2>
+    <p>Total Questions</p>
+  </div>
+
+  <div class="stat-box">
+    <h2 id="totalStudents">0</h2>
+    <p>Total Attempts</p>
+  </div>
+
+  <div class="stat-box">
+    <h2 id="averageScore">0</h2>
+    <p>Average Score</p>
+  </div>
+</div>
+    <p>Add Mock Test Questions</p>
+
+    <div class="pdf-upload-box">
+
+      <input
+        type="text"
+        id="testName"
+        placeholder="Enter Mock Test Name (Example: RRB NTPC MOCK 1)"
+      >
+
+      <select id="subjectCategory">
+        <option value="">Select Subject Category</option>
+        <option>Mathematics</option>
+        <option>Reasoning</option>
+        <option>General Awareness</option>
+        <option>Physics</option>
+        <option>Chemistry</option>
+        <option>Full Mock Test</option>
+      </select>
+
+      <select id="testDuration">
+  <option value="30">30 Minutes</option>
+  <option value="60">60 Minutes</option>
+  <option value="90" selected>90 Minutes</option>
+  <option value="120">120 Minutes</option>
+</select>
+<select id="negativeMarking">
+  <option value="0">No Negative Marking</option>
+  <option value="0.25">0.25 Negative</option>
+  <option value="0.33" selected>0.33 Negative</option>
+  <option value="0.50">0.50 Negative</option>
+  <option value="1">1 Mark Negative</option>
+</select>
+<select id="testAccess">
+  <option value="free">Free Test</option>
+  <option value="premium">Premium Test</option>
+</select>
+<input type="datetime-local" id="startTime">
+<input type="datetime-local" id="endTime">
+
+      <h3>Upload Question PDF</h3>
+
+      <input type="file" id="pdfFile" accept="application/pdf">
+
+      <button onclick="readPDF()">Read PDF</button>
+
+      <button onclick="convertPDFTextToQuestions()">
+        Convert PDF Text to Questions
+      </button>
+
+      <textarea id="pdfOutput" placeholder="PDF text will appear here..."></textarea>
+
+    </div>
+
+    <textarea id="questionText" placeholder="Enter question"></textarea>
+
+    <input type="text" id="option1" placeholder="Option 1">
+    <input type="text" id="option2" placeholder="Option 2">
+    <input type="text" id="option3" placeholder="Option 3">
+    <input type="text" id="option4" placeholder="Option 4">
+
+    <select id="correctAnswer">
+      <option value="">Select Correct Answer</option>
+      <option value="0">Option 1</option>
+      <option value="1">Option 2</option>
+      <option value="2">Option 3</option>
+      <option value="3">Option 4</option>
+    </select>
+
+    <button onclick="addQuestion()">Add Question</button>
+
+    <button onclick="clearQuestions()" class="danger">
+      Clear All Questions
+    </button>
+
+    <h2>Saved Questions: <span id="count">0</span></h2>
+
+    <button onclick="showResults()">View Student Results</button>
+
+    <button onclick="exportResults()">Export Results CSV</button>
+    <button onclick="showFullQuestionEditor()">
+  Edit / Delete Questions
+</button>
+
+<div id="fullQuestionEditor"></div>
+
+    <button onclick="clearResults()" class="danger">
+      Clear Student Results
+    </button>
+
+    <button onclick="showLeaderboard()">Show Leaderboard</button>
+
+    <div id="questionEditor"></div>
+
+    <div id="resultsBox"></div>
+
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="admin.js"></script>
+
+</body>
+</html>

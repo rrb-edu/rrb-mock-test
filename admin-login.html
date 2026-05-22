@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<div class="login-container">
+
+  <div class="login-card">
+
+    <h1>Admin Login</h1>
+
+    <input type="password" id="adminPassword" placeholder="Enter Admin Password">
+
+    <button onclick="adminLogin()">Login</button>
+
+  </div>
+
+</div>
+
+<script>
+
+function adminLogin(){
+
+  let password = document.getElementById("adminPassword").value;
+
+  if(password === "admin123"){
+
+    localStorage.setItem("adminAccess", "true");
+
+    window.location.href = "admin.html";
+
+  }
+  else{
+    alert("Wrong Password");
+  }
+
+}
+
+</script>
+
+</body>
+</html>
