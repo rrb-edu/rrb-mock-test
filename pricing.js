@@ -24,7 +24,7 @@ async function buyPremium(){
 
     let options = {
 
-       key: "your_test_key_id",
+       key: "rzp_test_St50RswPNPpJ9p",
 
       amount: order.amount,
 
