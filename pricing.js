@@ -24,7 +24,7 @@ async function buyPremium(){
 
     let options = {
 
-       key: "rzp_test_St50RswPNPpJ9p",
+      key: "rzp_test_St50RswPNPpJ9p",
 
       amount: order.amount,
 
@@ -36,11 +36,26 @@ async function buyPremium(){
 
       order_id: order.id,
 
-      handler: function (response){
+      handler: async function (response){
+
+        let studentId = localStorage.getItem("studentId");
+
+        await fetch(
+          `https://rrb-mock-test.onrender.com/api/auth/premium/${studentId}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              isPremium: true
+            })
+          }
+        );
 
         localStorage.setItem("premiumUser", "true");
 
-        alert("Payment Successful!");
+        alert("Payment Successful! Premium Activated.");
 
         window.location.href = "dashboard.html";
 
