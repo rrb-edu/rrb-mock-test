@@ -6,6 +6,7 @@ if(!localStorage.getItem("studentName")){
 else{
 
   document.body.style.display = "block";
+
 }
 
 async function buyPremium(){
@@ -35,39 +36,61 @@ async function buyPremium(){
 
       order_id: order.id,
 
-    handler: async function (response){
+      handler: async function (response){
 
-  let email = localStorage.getItem("studentEmail");
+        let email = localStorage.getItem("studentEmail");
 
-  let verifyResponse = await fetch(
-    "https://rrb-mock-test.onrender.com/api/payment/verify",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
+        let verifyResponse = await fetch(
+          "https://rrb-mock-test.onrender.com/api/payment/verify",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+              email: email
+            })
+          }
+        );
+
+        let verifyData = await verifyResponse.json();
+
+        if(verifyData.success === true){
+
+          localStorage.setItem("premiumUser", "true");
+
+          alert("Payment Verified! Premium Activated ✅");
+
+          window.location.href = "dashboard.html";
+
+        }
+        else{
+
+          alert("Payment verification failed ❌");
+
+        }
+
       },
-      body: JSON.stringify({
-        razorpay_order_id: response.razorpay_order_id,
-        razorpay_payment_id: response.razorpay_payment_id,
-        razorpay_signature: response.razorpay_signature,
-        email: email
-      })
-    }
-  );
 
-  let verifyData = await verifyResponse.json();
+      theme: {
+        color: "#3399cc"
+      }
 
-  if(verifyData.success === true){
+    };
 
-    localStorage.setItem("premiumUser", "true");
+    let rzp = new Razorpay(options);
 
-    alert("Payment Verified! Premium Activated ✅");
+    rzp.open();
 
-    window.location.href = "dashboard.html";
+  }
+  catch(error){
 
-  } else {
+    console.log(error);
 
-    alert("Payment verification failed ❌");
+    alert("Payment failed");
 
   }
 
