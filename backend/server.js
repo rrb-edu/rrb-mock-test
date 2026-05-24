@@ -114,7 +114,18 @@ app.post("/api/payment/verify", async (req, res) => {
         premiumExpiresAt: premiumExpiry,
         lastOrderId: razorpay_order_id,
         lastPaymentId: razorpay_payment_id,
-        premiumAmount: 79
+        premiumAmount: 79,
+
+$push: {
+  payments: {
+    orderId: razorpay_order_id,
+    paymentId: razorpay_payment_id,
+    amount: 79,
+    status: "success",
+    plan: "Monthly",
+    purchasedAt: new Date()
+  }
+}
       },
 
       { new: true }

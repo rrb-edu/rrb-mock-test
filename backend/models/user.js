@@ -19,7 +19,18 @@ const userSchema = new mongoose.Schema({
   premiumExpiresAt: Date,
   lastOrderId: String,
   lastPaymentId: String,
-  premiumAmount: Number
+  premiumAmount: Number,
+
+payments: [
+  {
+    orderId: String,
+    paymentId: String,
+    amount: Number,
+    status: String,
+    plan: String,
+    purchasedAt: Date
+  }
+]
 });
 
 module.exports = mongoose.model("User", userSchema);
