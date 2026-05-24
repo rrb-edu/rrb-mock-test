@@ -94,6 +94,10 @@ async function loginUser(){
   let password =
     document.getElementById("loginPassword").value;
 
+    let loginBtn = document.getElementById("loginBtn");
+loginBtn.innerText = "Logging in... Please wait";
+loginBtn.disabled = true;
+
   try{
 
     let response = await fetch(
@@ -127,6 +131,8 @@ async function loginUser(){
     }
     else{
 
+      loginBtn.innerText = "Login";
+      loginBtn.disabled = false;
       alert(data.message);
 
     }
@@ -135,7 +141,8 @@ async function loginUser(){
   catch(error){
 
     console.log(error);
-
+    loginBtn.innerText = "Login";
+    loginBtn.disabled = false;
     alert("Login failed");
 
   }
