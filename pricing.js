@@ -9,12 +9,60 @@ else{
 
 }
 
-function buyPremium(){
+async function buyPremium(){
 
-  localStorage.setItem("premiumUser", "true");
+  try{
 
-  alert("Premium Activated Successfully!");
+    let response = await fetch(
+      "https://rrb-mock-test.onrender.com/create-order",
+      {
+        method: "POST"
+      }
+    );
 
-  window.location.href = "dashboard.html";
+    let order = await response.json();
+
+    let options = {
+
+      key: "rzp_live_SsRoU1XKVWUB0d",
+
+      amount: order.amount,
+
+      currency: order.currency,
+
+      name: "RRB EDU",
+
+      description: "Premium Subscription",
+
+      order_id: order.id,
+
+      handler: function (response){
+
+        localStorage.setItem("premiumUser", "true");
+
+        alert("Payment Successful!");
+
+        window.location.href = "dashboard.html";
+
+      },
+
+      theme: {
+        color: "#3399cc"
+      }
+
+    };
+
+    let rzp = new Razorpay(options);
+
+    rzp.open();
+
+  }
+  catch(error){
+
+    console.log(error);
+
+    alert("Payment failed");
+
+  }
 
 }
