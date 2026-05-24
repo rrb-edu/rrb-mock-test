@@ -40,18 +40,20 @@ async function buyPremium(){
 
         let studentId = localStorage.getItem("studentId");
 
-        await fetch(
-          `https://rrb-mock-test.onrender.com/api/auth/premium/${studentId}`,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              isPremium: true
-            })
-          }
-        );
+await fetch(
+  `https://rrb-mock-test.onrender.com/api/auth/premium/${studentId}`,
+  {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      isPremium: true,
+      paymentId: response.razorpay_payment_id,
+      orderId: response.razorpay_order_id
+    })
+  }
+);
 
         localStorage.setItem("premiumUser", "true");
 

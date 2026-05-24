@@ -129,33 +129,48 @@ let token = jwt.sign(
 ========================= */
 
 router.put("/premium/:id", async (req, res) => {
+
   try {
-    const { isPremium } = req.body;
 
-    let expiryDate = null;
+    const expiryDate = new Date();
 
-    if(isPremium){
-      expiryDate = new Date();
-      expiryDate.setDate(expiryDate.getDate() + 30);
-    }
+    expiryDate.setDate(expiryDate.getDate() + 30);
 
-    const student = await Student.findByIdAndUpdate(
+    const updatedStudent = await Student.findByIdAndUpdate(
+
       req.params.id,
+
       {
-        isPremium: isPremium,
-        premiumExpiresAt: expiryDate
+        isPremium: true,
+
+        premiumStartedAt: new Date(),
+
+        premiumExpiresAt: expiryDate,
+
+        lastPaymentId: req.body.paymentId || null,
+
+        lastOrderId: req.body.orderId || null,
+
+        premiumAmount: 79
       },
+
       { new: true }
+
     );
 
-    res.json({
-      message: "Premium status updated successfully",
-      student
+    res.json(updatedStudent);
+
+  }
+  catch(error){
+
+    console.log(error);
+
+    res.status(500).json({
+      message: "Premium update failed"
     });
 
-  } catch (error) {
-    res.status(500).json({ message: "Server error" });
   }
+
 });
 router.get("/students", async (req, res) => {
   try {
