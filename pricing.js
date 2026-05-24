@@ -6,7 +6,6 @@ if(!localStorage.getItem("studentName")){
 else{
 
   document.body.style.display = "block";
-
 }
 
 async function buyPremium(){
@@ -24,7 +23,7 @@ async function buyPremium(){
 
     let options = {
 
-      key: "rzp_test_St50RswPNPpJ9p",
+      key: "rzp_test_StELBeW54KuHOD",
 
       amount: order.amount,
 
