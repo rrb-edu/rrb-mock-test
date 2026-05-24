@@ -123,6 +123,7 @@ loginBtn.disabled = true;
     if(response.ok){
      console.log(data);
       localStorage.setItem("token", data.token);
+      localStorage.setItem("studentEmail", user.email);
       localStorage.setItem("studentId", data.student.id || data.student._id);
       localStorage.setItem( "studentName", data.student.name);
       localStorage.setItem("premiumUser", String(data.student.isPremium));

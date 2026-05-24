@@ -35,49 +35,39 @@ async function buyPremium(){
 
       order_id: order.id,
 
-      handler: async function (response){
+    handler: async function (response){
 
-        let studentId = localStorage.getItem("studentId");
+  let email = localStorage.getItem("studentEmail");
 
-await fetch(
-  `https://rrb-mock-test.onrender.com/api/auth/premium/${studentId}`,
-  {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      isPremium: true,
-      paymentId: response.razorpay_payment_id,
-      orderId: response.razorpay_order_id
-    })
-  }
-);
-
-        localStorage.setItem("premiumUser", "true");
-
-        alert("Payment Successful! Premium Activated.");
-
-        window.location.href = "dashboard.html";
-
+  let verifyResponse = await fetch(
+    "https://rrb-mock-test.onrender.com/api/payment/verify",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
       },
+      body: JSON.stringify({
+        razorpay_order_id: response.razorpay_order_id,
+        razorpay_payment_id: response.razorpay_payment_id,
+        razorpay_signature: response.razorpay_signature,
+        email: email
+      })
+    }
+  );
 
-      theme: {
-        color: "#3399cc"
-      }
+  let verifyData = await verifyResponse.json();
 
-    };
+  if(verifyData.success === true){
 
-    let rzp = new Razorpay(options);
+    localStorage.setItem("premiumUser", "true");
 
-    rzp.open();
+    alert("Payment Verified! Premium Activated ✅");
 
-  }
-  catch(error){
+    window.location.href = "dashboard.html";
 
-    console.log(error);
+  } else {
 
-    alert("Payment failed");
+    alert("Payment verification failed ❌");
 
   }
 
