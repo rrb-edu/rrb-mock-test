@@ -23,6 +23,17 @@ const studentSchema = new mongoose.Schema({
     default: false
   },
 
+  payments: [
+    {
+      orderId: String,
+      paymentId: String,
+      amount: Number,
+      status: String,
+      plan: String,
+      purchasedAt: Date
+    }
+  ],
+
   premiumStartedAt: {
     type: Date,
     default: null
