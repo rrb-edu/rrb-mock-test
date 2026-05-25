@@ -68,9 +68,7 @@ app.post("/create-order", async (req, res) => {
 
 // VERIFY PAYMENT API
 app.post("/api/payment/verify", async (req, res) => {
-
   try {
-
     const {
       razorpay_order_id,
       razorpay_payment_id,
@@ -78,79 +76,70 @@ app.post("/api/payment/verify", async (req, res) => {
       email
     } = req.body;
 
-    const body =
-      razorpay_order_id + "|" + razorpay_payment_id;
+    const body = razorpay_order_id + "|" + razorpay_payment_id;
 
     const expectedSignature = crypto
-      .createHmac(
-        "sha256",
-        process.env.RAZORPAY_KEY_SECRET
-      )
-      .update(body.toString())
+      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+      .update(body)
       .digest("hex");
 
     if (expectedSignature !== razorpay_signature) {
-
       return res.status(400).json({
         success: false,
         message: "Invalid payment signature ❌"
       });
-
     }
 
     const premiumExpiry = new Date();
-
-    premiumExpiry.setDate(
-      premiumExpiry.getDate() + 30
-    );
+    premiumExpiry.setDate(premiumExpiry.getDate() + 30);
 
     const user = await User.findOneAndUpdate(
-
-      { email },
-
+      { email: email },
       {
-        isPremium: true,
-        premiumStartedAt: new Date(),
-        premiumExpiresAt: premiumExpiry,
-        lastOrderId: razorpay_order_id,
-        lastPaymentId: razorpay_payment_id,
-        premiumAmount: 79,
+        $set: {
+          isPremium: true,
+          premiumStartedAt: new Date(),
+          premiumExpiresAt: premiumExpiry,
+          lastOrderId: razorpay_order_id,
+          lastPaymentId: razorpay_payment_id,
+          premiumAmount: 79
+        },
 
-$push: {
-  payments: {
-    orderId: razorpay_order_id,
-    paymentId: razorpay_payment_id,
-    amount: 79,
-    status: "success",
-    plan: "Monthly",
-    purchasedAt: new Date()
-  }
-}
+        $push: {
+          payments: {
+            orderId: razorpay_order_id,
+            paymentId: razorpay_payment_id,
+            amount: 79,
+            status: "success",
+            plan: "Monthly",
+            purchasedAt: new Date()
+          }
+        }
       },
-
       { new: true }
-
     );
-    console.log(user);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "Student not found with this email"
+      });
+    }
 
     res.json({
       success: true,
-      message:
-        "Payment verified & premium activated ✅",
-      user
+      message: "Payment verified & premium activated ✅",
+      user: user
     });
 
   } catch (error) {
-
     console.log(error);
 
     res.status(500).json({
       success: false,
       message: "Payment verification failed"
     });
-
   }
-
 });
 
 
