@@ -141,7 +141,41 @@ app.post("/api/payment/verify", async (req, res) => {
     });
   }
 });
+app.get("/api/auth/check-premium/:email", async (req, res) => {
+  try {
+    const student = await User.findOne({
+      email: req.params.email
+    });
 
+    if (!student) {
+      return res.status(404).json({
+        success: false,
+        message: "Student not found"
+      });
+    }
+
+    if (
+      student.isPremium &&
+      student.premiumExpiresAt &&
+      new Date() > new Date(student.premiumExpiresAt)
+    ) {
+      student.isPremium = false;
+      await student.save();
+    }
+
+    res.json({
+      success: true,
+      isPremium: student.isPremium,
+      premiumExpiresAt: student.premiumExpiresAt
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Premium check failed"
+    });
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 

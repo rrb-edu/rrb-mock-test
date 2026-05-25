@@ -7,6 +7,46 @@ else{
   document.body.style.display = "block";
 }
 
+async function checkPremiumStatus(){
+
+  let email =
+    localStorage.getItem("studentEmail");
+
+  if(!email){
+    return;
+  }
+
+  try{
+
+    let response = await fetch(
+      `https://rrb-mock-test.onrender.com/api/auth/check-premium/${email}`
+    );
+
+    let data = await response.json();
+
+    if(data.success){
+
+      localStorage.setItem(
+        "premiumUser",
+        String(data.isPremium)
+      );
+
+    }
+
+  }
+  catch(error){
+
+    console.log(
+      "Premium check failed",
+      error
+    );
+
+  }
+
+}
+
+checkPremiumStatus();
+
 const studentName = localStorage.getItem("studentName") || "Student";
 
 document.getElementById("studentName").innerText =
