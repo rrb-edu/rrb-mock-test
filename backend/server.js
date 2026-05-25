@@ -177,6 +177,48 @@ app.get("/api/auth/check-premium/:email", async (req, res) => {
   }
 });
 
+app.get("/api/admin/payments", async (req, res) => {
+
+  try{
+
+    const students = await User.find({
+      isPremium: true
+    }).select(
+      "name email payments premiumAmount premiumStartedAt premiumExpiresAt"
+    );
+
+    let totalRevenue = 0;
+
+    students.forEach(student => {
+
+      totalRevenue += student.premiumAmount || 0;
+
+    });
+
+    res.json({
+
+      totalPremiumUsers: students.length,
+
+      totalRevenue: totalRevenue,
+
+      students: students
+
+    });
+
+  }
+  catch(error){
+
+    console.log(error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to load payments"
+    });
+
+  }
+
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
