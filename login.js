@@ -22,6 +22,7 @@ function showSignup(){
 
 }
 
+
 /* =========================
    SIGNUP
 ========================= */
@@ -38,8 +39,11 @@ async function signupUser(){
     document.getElementById("signupPassword").value;
 
   if(name === "" || email === "" || password === ""){
+
     alert("Please fill all fields");
+
     return;
+
   }
 
   try{
@@ -68,7 +72,9 @@ async function signupUser(){
     alert(data.message);
 
     if(response.ok){
+
       showLogin();
+
     }
 
   }
@@ -82,6 +88,7 @@ async function signupUser(){
 
 }
 
+
 /* =========================
    LOGIN
 ========================= */
@@ -94,9 +101,13 @@ async function loginUser(){
   let password =
     document.getElementById("loginPassword").value;
 
-    let loginBtn = document.getElementById("loginBtn");
-loginBtn.innerText = "Logging in... Please wait";
-loginBtn.disabled = true;
+  let loginBtn =
+    document.getElementById("loginBtn");
+
+  loginBtn.innerText =
+    "Logging in... Please wait";
+
+  loginBtn.disabled = true;
 
   try{
 
@@ -121,20 +132,52 @@ loginBtn.disabled = true;
     let data = await response.json();
 
     if(response.ok){
-     console.log(data);
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("studentEmail", user.email);
-      localStorage.setItem("studentId", data.student.id || data.student._id);
-      localStorage.setItem( "studentName", data.student.name);
-      localStorage.setItem("premiumUser", String(data.student.isPremium));
-      localStorage.setItem("role", data.student.role);
- window.location.href = "dashboard.html";
+
+      console.log(data);
+
+      localStorage.setItem(
+        "token",
+        data.token
+      );
+
+      localStorage.setItem(
+        "studentEmail",
+        data.student.email
+      );
+
+      localStorage.setItem(
+        "studentId",
+        data.student.id || data.student._id
+      );
+
+      localStorage.setItem(
+        "studentName",
+        data.student.name
+      );
+
+      localStorage.setItem(
+        "premiumUser",
+        String(data.student.isPremium)
+      );
+
+      localStorage.setItem(
+        "role",
+        data.student.role
+      );
+
+      loginBtn.innerText = "Login";
+
+      loginBtn.disabled = false;
+
+      window.location.href = "dashboard.html";
 
     }
     else{
 
       loginBtn.innerText = "Login";
+
       loginBtn.disabled = false;
+
       alert(data.message);
 
     }
@@ -143,8 +186,11 @@ loginBtn.disabled = true;
   catch(error){
 
     console.log(error);
+
     loginBtn.innerText = "Login";
+
     loginBtn.disabled = false;
+
     alert("Login failed");
 
   }
