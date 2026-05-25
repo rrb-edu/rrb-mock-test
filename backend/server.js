@@ -131,6 +131,7 @@ $push: {
       { new: true }
 
     );
+    console.log(user);
 
     res.json({
       success: true,
